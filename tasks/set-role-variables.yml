@@ -89,7 +89,8 @@
 
 - name: compose url for downloading file, if necessary
   set_fact:
-    jdk_tarball_url:  "http://download.oracle.com/otn-pub/java/jdk/{{ jdk_version_detail }}/{{ jdk_tarball_file }}"
+#    jdk_tarball_url:  "http://download.oracle.com/otn-pub/java/jdk/{{ jdk_version_detail }}/{{ jdk_tarball_file }}"
+    jdk_tarball_url:  "wget http://repos.copv.junta-andalucia.es/repo/copv/deploy/{{ jdk_tarball_file }}"
   when: jdk_version_detail is defined and jdk_tarball_hash is not defined
 
 
