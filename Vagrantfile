@@ -10,10 +10,10 @@ Vagrant.configure(2) do |config|
         #node.vm.box = "bento/centos-6.7"
 
         node.vm.provision "ansible" do |ansible|
-            ansible.playbook = "test.yml"
-            #ansible.playbook = "prefetch.yml"
+            #ansible.playbook = "test.yml"
+            ansible.playbook = "prefetch.yml"
             ansible.sudo = true
-            #ansible.verbose = "vvv"
+            ansible.verbose = "vvv"
         end
     end
 

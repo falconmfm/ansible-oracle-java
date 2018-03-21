@@ -9,13 +9,13 @@
 
 - name: precondition - java_subversion
   fail: msg="ERROR - required variable 'java_subversion' missing."
-  when: java_subversion is not defined
+  when: java_subversion is not defined and java_version <= 9
 
 - name: precondition - java_install_jce
   fail: msg="ERROR - required variable 'java_install_jce' missing."
-  when: java_install_jce is not defined
+  when: java_install_jce is not defined and java_version <= 8
 
-- import_tasks: set-role-variables.yml
+- import_tasks: set-role-variables.yml 
 
 
 
@@ -39,4 +39,4 @@
 
 - name: delegate to JCE zip installation process
   import_tasks: install_jce.yml
-  when: java_install_jce
+  when: java_install_jce and java_version <= 8
