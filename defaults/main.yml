@@ -11,7 +11,8 @@
 #
 
 java_version: 9
-java_subversion: 4
+java_subversion: 04
+
 
 java_download_path: /tmp
 java_download_from_oracle: true
