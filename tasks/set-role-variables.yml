@@ -74,7 +74,7 @@
 
 - name: set internal vars for 10
   set_fact:
-    jdk_version_detail: "{{ java_version }}+46"
+    jdk_version_detail: "{{ java_version }}+{{ java_build }}"
     jdk_tarball_hash: 76eac37278c24557a3c4199677f19b62
   when: java_version == 10
 
@@ -82,7 +82,7 @@
 - name: set internal vars for 9.0.4
   set_fact:
     java_subversion: 0.4
-    jdk_version_detail: "{{ java_version }}.{{ java_subversion }}+11"
+    jdk_version_detail: "{{ java_version }}.{{ java_subversion }}+{{ java_build }}"
     jdk_tarball_hash: c2514751926b4512b076cc82f959763f
   when: java_version == 9
 
