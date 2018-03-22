@@ -8,8 +8,8 @@
     - 'defaults/main.yml'
 
   vars:
-    java_version: 9
-    java_subversion: 4
+    java_version: 10
+    java_subversion: 
     java_install_jce: true
     proxy_env:
       http_proxy: http://proxy.cfv.junta-andalucia.es:3128

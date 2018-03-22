@@ -76,7 +76,7 @@
   set_fact:
     jdk_version_detail: "{{ java_version }}+46"
     jdk_tarball_hash: 76eac37278c24557a3c4199677f19b62
-  when: java_version == 10  and java_subversion == 0
+  when: java_version == 10
 
 ## JDK 9
 - name: set internal vars for 9.0.4
@@ -154,6 +154,11 @@
     jdk_tarball_file: "jdk-{{ java_version }}.{{ java_subversion }}_{{ jdk_os }}-{{ jdk_arch }}_bin"
   when: jdk_tarball_file is not defined and java_version == 9
 
+- name: compose filename, if necessary
+  set_fact:
+    jdk_tarball_file: "jdk-{{ java_version }}_{{ jdk_os }}-{{ jdk_arch }}_bin"
+  when: jdk_tarball_file is not defined and java_version == 10
+
 - name: compose url for downloading file, if necessary
   set_fact:
     jdk_tarball_url:  "http://download.oracle.com/otn-pub/java/jdk/{{ jdk_version_detail }}/{{ jdk_tarball_file }}"
@@ -170,6 +175,11 @@
   set_fact:
     jdk_tarball_url: "http://download.oracle.com/otn-pub/java/jdk/{{ jdk_version_detail }}/{{ jdk_tarball_hash }}/{{ jdk_tarball_file }}"
   when: jdk_version_detail is defined and jdk_tarball_hash is defined and java_version == 9
+
+- name: compose url for downloading file, if necessary
+  set_fact:
+    jdk_tarball_url: "http://download.oracle.com/otn-pub/java/jdk/{{ jdk_version_detail }}/{{ jdk_tarball_hash }}/{{ jdk_tarball_file }}"
+  when: jdk_version_detail is defined and jdk_tarball_hash is defined and java_version == 10
 
 #
 # JCE variables

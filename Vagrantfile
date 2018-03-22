@@ -26,7 +26,7 @@ Vagrant.configure(2) do |config|
         node.vm.provision "shell", inline: <<-SHELL
             cd /vagrant
             docker build  -f test/Dockerfile-ubuntu14.04  -t java_trusty   .
-            docker build  -f test/Dockerfile-ubuntu12.04  -t java_precise  .
+            docker build  -f test/Dockerfile-ubuntu16.04  -t java_precise  .
             docker build  -f test/Dockerfile-debian8      -t java_jessie   .
             docker build  -f test/Dockerfile-debian7      -t java_wheezy   .
             docker build  -f test/Dockerfile-centos7      -t java_centos7  .
