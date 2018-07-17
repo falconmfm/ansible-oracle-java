@@ -79,9 +79,9 @@
 ## JDK 10
 - name: set internal vars for 10
   set_fact:
-    java_subversion: 0.1
-    jdk_version_detail: "{{ java_version }}.{{ java_subversion }}+10"
-    jdk_tarball_hash: fb4372174a714e6b8c52526dc134031e
+    java_subversion: 0.2
+    jdk_version_detail: "{{ java_version }}.{{ java_subversion }}+13"
+    jdk_tarball_hash: 19aef61b38124481863b1413dce1855f
   when: java_version == 10
 
 
