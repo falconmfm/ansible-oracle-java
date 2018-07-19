@@ -61,7 +61,7 @@
 
 - block:
 
-    # No link creation is necessary on Mac OS X -- 
+    # No link creation is necessary on Mac OS X --
     # the package installer automatically creates symlinks in /usr/bin.
 
     - name: link "{{ java_install_dir }}/{{ java_default_link_name }} on rpm based systems for JDK8"
@@ -112,7 +112,7 @@
 
     - name: alternatives link for "keytool"
       alternatives:
-        name: java
+        name: keytool
         link: /usr/bin/keytool
         path: "{{ java_install_dir }}/{{ java_default_link_name }}/bin/keytool"
 
