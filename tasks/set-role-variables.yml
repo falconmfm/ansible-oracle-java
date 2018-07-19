@@ -4,22 +4,30 @@
 #
 
 
-- name: set general internal vars for {{ java_version }}
+- name: set general internal vars for java 8
   set_fact:
     jdk_version: "1.{{ java_version }}.0_{{ java_subversion }}"
   when: java_version == 8
 
-- name: set general internal vars for {{ java_version }}
+- name: set java subversion java 9
   set_fact:
     # JDK 9 is only available in 9.0.4
-    jdk_subversion: 0.4
+    java_subversion: 0.4
+  when: java_version == 9
+
+- name: set general internal vars for java 9
+  set_fact:
     jdk_version: "{{ java_version }}.{{ java_subversion }}"
   when: java_version == 9
 
-- name: set general internal vars for {{ java_version }}
+- name: set java subversion for java 10
   set_fact:
-    # JDK 10 is only available in 10.0.1
-    jdk_subversion: 0.1
+    # JDK 10 is only available in 10.0.2
+    java_subversion: 0.2
+  when: java_version == 10
+
+- name: set general internal vars for java 10
+  set_fact:
     jdk_version: "{{ java_version }}.{{ java_subversion }}"
   when: java_version == 10
 
