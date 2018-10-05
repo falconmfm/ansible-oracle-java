@@ -61,22 +61,36 @@
 
 - block:
 
-    # No link creation is necessary on Mac OS X -- 
+    # No link creation is necessary on Mac OS X --
     # the package installer automatically creates symlinks in /usr/bin.
 
-    - name: link "{{ java_install_dir }}/{{ java_default_link_name }}"
+    - name: link "{{ java_install_dir }}/{{ java_default_link_name }} on rpm based systems for JDK8"
+      file:
+        src: "{{ java_install_dir }}/jdk{{ jdk_version }}-amd64"
+        dest: "{{ java_install_dir }}/{{ java_default_link_name }}"
+        state: link
+      when: java_version == 8 and use_rpm
+
+    - name: link "{{ java_install_dir }}/{{ java_default_link_name }} on tarball based systems for JDK8"
       file:
         src: "{{ java_install_dir }}/jdk{{ jdk_version }}"
         dest: "{{ java_install_dir }}/{{ java_default_link_name }}"
         state: link
-      when: java_version == 8
+      when: java_version == 8 and use_tarball
 
-    - name: link "{{ java_install_dir }}/{{ java_default_link_name }}"
+    - name: link "{{ java_install_dir }}/{{ java_default_link_name }} on rpm based systems for JDK > 8"
       file:
         src: "{{ java_install_dir }}/jdk-{{ jdk_version }}"
         dest: "{{ java_install_dir }}/{{ java_default_link_name }}"
         state: link
-      when: java_version == 9
+      when: java_version != 8 and use_rpm
+
+    - name: link "{{ java_install_dir }}/{{ java_default_link_name }} on tarball based systems for JDK > 8"
+      file:
+        src: "{{ java_install_dir }}/jdk-{{ jdk_version }}"
+        dest: "{{ java_install_dir }}/{{ java_default_link_name }}"
+        state: link
+      when: java_version != 8 and use_tarball
 
     - name: alternatives link for "java"
       alternatives:
@@ -95,6 +109,12 @@
         name: jar
         link: /usr/bin/jar
         path: "{{ java_install_dir }}/{{ java_default_link_name }}/bin/jar"
+
+    - name: alternatives link for "keytool"
+      alternatives:
+        name: keytool
+        link: /usr/bin/keytool
+        path: "{{ java_install_dir }}/{{ java_default_link_name }}/bin/keytool"
 
     - name: check if "java_sdk" target exists
       stat: path=/usr/lib/jvm/java
